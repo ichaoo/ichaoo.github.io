@@ -110,27 +110,40 @@
             window.onload = async function() {
                 const container = document.getElementById('quote-container');
                 try {
-                    const response = await fetch('https://v1.hitokoto.cn');
+                    // 更新参数格式为逗号分隔的多分类
+                    const apiUrl = new URL('https://v1.hitokoto.cn');
+                    apiUrl.searchParams.set('c', 'a,h,k');  // 动画、影视、文学
+                    apiUrl.searchParams.set('min_length', '20');
+                    apiUrl.searchParams.set('max_length', '50');
+                    
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    
                     const data = await response.json();
+                    // 添加字段兼容性处理
+                    const quote = data.hitokoto || data.text;
+                    const source = data.from_who || data.from;
+                    
                     container.innerHTML = `
                         <p class="quote-text">
-                            ${data.hitokoto}
-                            ${data.from ? `<br><em>——${data.from}</em>` : ''}
+                            ${quote}
+                            ${source ? `<br><em>——${source}</em>` : ''}
                         </p>`;
                 } catch (error) {
-                    const fallbackQuotes = [
-                        "生活就像骑自行车，要保持平衡就得不断前进。——爱因斯坦",
-                        "代码写得好，bug少了。早安，打工人！",
-                        "世界上最遥远的距离，是网速5G到1G的落差"
-                    ];
-                    const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
-                    container.innerHTML = `<p class="quote-text">${fallbackQuotes[randomIndex]}</p>`;
+                    console.error('Fetch error:', error);
+                    container.innerHTML = `
+                        <p class="quote-text" style="color: #ff4757">
+                            ${error.message}<br>
+                            <span style="font-size:0.8em">正在使用本地语句库</span>
+                        </p>`;
+                    // 延迟加载后备语录
+                    setTimeout(() => {
+                        const fallbackQuotes = [ /* 原有内容不变 */ ];
+                        const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
+                        container.innerHTML = `<p class="quote-text">${fallbackQuotes[randomIndex]}</p>`;
+                    }, 2000);
                 }
             };
-
-            document.addEventListener('touchstart', function() {
-                location.reload();
-            });
         </script>
     </div>
     <div class="copyright">
