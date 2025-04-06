@@ -110,7 +110,7 @@
             window.onload = async function() {
                 const container = document.getElementById('quote-container');
                 try {
-                    const response = await fetch('https://v1.hitokoto.cn/?c=H&max_length=45');
+                    const response = await fetch('https://v1.hitokoto.cn');
                     const data = await response.json();
                     container.innerHTML = `
                         <p class="quote-text">
