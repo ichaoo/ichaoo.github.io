@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新语</title>
+    <link href="https://fonts.googleapis.cn/css2?family=Inter:wght@400;500;600&family=Source+Han+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 40px);
+            font-family: 'Inter', 'Source Han Sans SC', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        #quote-container {
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .quote-text {
+            line-height: 1.5;
+            font-size: clamp(1.2rem, 2.5vw, 1.4em);
+            color: #2c3e50;
+            position: relative;
+            padding-left: 1.5rem;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .quote-text::before {
+            content: "“";
+            position: absolute;
+            left: -0.8rem;
+            top: -1.2rem;
+            font-size: 4em;
+            color: rgba(44, 62, 80, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                min-height: calc(100vh - 20px);
+            }
+            #quote-container {
+                padding: 1.5rem;
+                border-radius: 20px;
+                max-width: 85%;
+            }
+            .quote-text {
+                font-size: clamp(1rem, 3.5vw, 1.1em);
+                -webkit-line-clamp: 4;
+                padding-left: 1rem;
+                font-weight: 400;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 1.5rem;
+            width: fit-content;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(44, 62, 80, 0.7);
+            font-family: 'Geist Sans', 'Source Han Sans CN', sans-serif;
+            font-weight: 450;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            padding: 8px 20px;
+            border-radius: 12px;
+            transition: opacity 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .copyright {
+                font-size: 0.8em;
+                bottom: 1rem;
+                padding: 6px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="quote-container">
+        <script>
+            window.onload = async function() {
+                const container = document.getElementById('quote-container');
+                try {
+                    const response = await fetch('https://v1.hitokoto.cn/?c=H&max_length=45');
+                    const data = await response.json();
+                    container.innerHTML = `
+                        <p class="quote-text">
+                            ${data.hitokoto}
+                            ${data.from ? `<br><em>——${data.from}</em>` : ''}
+                        </p>`;
+                } catch (error) {
+                    const fallbackQuotes = [
+                        "生活就像骑自行车，要保持平衡就得不断前进。——爱因斯坦",
+                        "代码写得好，bug少了。早安，打工人！",
+                        "世界上最遥远的距离，是网速5G到1G的落差"
+                    ];
+                    const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
+                    container.innerHTML = `<p class="quote-text">${fallbackQuotes[randomIndex]}</p>`;
+                }
+            };
+
+            document.addEventListener('touchstart', function() {
+                location.reload();
+            });
+        </script>
+    </div>
+    <div class="copyright">
+        数据来源：Hitokoto·一言 | © 2025 小王同学
+    </div>
+</body>
+</html>
