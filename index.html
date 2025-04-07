@@ -187,12 +187,6 @@
             margin-bottom: 8px;
         }
 
-        /* 社交品牌色 */
-        .weibo { color: #e6162d; }
-        .douban { color: #007722; }
-        .netease { color: #c20c0c; }
-        .xiaohongshu { color: #ff2442; }
-
         /* 交互效果 */
         .social-trigger:hover {
             transform: scale(1.1) rotate(12deg);
@@ -301,22 +295,9 @@
                 bottom: 1rem;
                 padding: 6px 16px;
             }
-            .social-panel {
-                top: 5rem;
-                right: -100%;
-                width: 80%;
-                max-width: 280px;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .social-links {
-                grid-template-columns: 1fr;
-            }
-            .social-panel {
-                width: 260px;
-                right: -280px;
-            }
+        .social-links {
+            grid-template-columns: 1fr;
         }
     </style>
 </head>
@@ -334,7 +315,7 @@
             <p class="profile-bio">电影爱好者 | 学生</p>
         </div>
         <div class="social-links">
-            <a href="https://weibo.com/你的账号" target="_blank" class="weibo">
+            <a href="https://weibo.com/" target="_blank" class="weibo">
                 <span>微博</span>
             </a>
             <a href="https://www.x.com/user/" target="_blank" class="Douyin">
@@ -343,13 +324,13 @@
             <a href="https://www.douyin.com/user/" target="_blank" class="Douyin">
                 <span>抖音</span>
             </a>
-            <a href="https://www.douban.com/people/你的ID/" target="_blank" class="douban">
+            <a href="https://www.douban.com/people/" target="_blank" class="douban">
                 <span>豆瓣</span>
             </a>
-            <a href="https://music.163.com/#/user/home?id=你的ID" target="_blank" class="netease">
+            <a href="https://music.163.com/#/user/home?id=" target="_blank" class="netease">
                 <span>网易云</span>
             </a>
-            <a href="https://www.xiaohongshu.com/user/profile/你的ID" target="_blank" class="xiaohongshu">
+            <a href="https://www.xiaohongshu.com/user/profile/" target="_blank" class="xiaohongshu">
                 <span>小红书</span>
             </a>
         </div>
