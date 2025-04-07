@@ -72,21 +72,44 @@
             position: fixed;
             left: 50%;
             top: -100%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) scale(0.95); /* 添加初始缩放 */
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* 增强动画曲线 */
             z-index: 100;
             width: min(500px, 80%);
             max-width: 90vw;
+            opacity: 0; /* 初始透明度 */
+            filter: blur(2px); /* 初始模糊效果 */
         }
 
         .page-title.active + .social-panel {
-            top: calc(2rem + 3em);
+            top: calc(2rem + 4em); /* 增加展开间距 */
+            opacity: 1;
+            filter: blur(0); /* 清除模糊 */
+            transform: translateX(-50%) scale(1); /* 最终缩放 */
         }
 
+        /* 添加PC端专属效果 */
+        @media (min-width: 769px) {
+            .social-panel {
+                transition-property: top, opacity, transform, filter; /* 指定过渡属性 */
+            }
+            
+            .page-title.active + .social-panel {
+                top: calc(2rem + 5em); /* PC端更大的间距 */
+                box-shadow: 0 8px 32px rgba(0,0,0,0.15); /* 加强投影 */
+            }
+        }
+
+        /* 移动端保持原有效果 */
+        @media (max-width: 768px) {
+            .page-title.active + .social-panel {
+                top: calc(2rem + 3em);
+            }
+        }
         .profile-section {
             text-align: center;
             padding-bottom: 1.5rem;
