@@ -90,7 +90,7 @@
         .social-trigger {
             position: fixed;
             right: 2rem;
-            top: 2rem;
+            bottom: 2rem; /* 从 top 改为 bottom */
             cursor: pointer;
             background: rgba(255,255,255,0.8);
             padding: 12px;
@@ -107,15 +107,29 @@
 
         .social-panel {
             position: fixed;
-            right: -320px;
-            top: 6rem;
+            left: -100%; /* 替换原 right 定位 */
+            top: 50%;
+            transform: translate(-50%, -50%); /* 新增居中定位 */
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 修改过渡属性 */
             z-index: 100;
             width: 300px;
+        }
+
+        .social-trigger.active + .social-panel {
+            left: 50%; /* 修改激活状态定位 */
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .social-panel {
+                width: 90%;
+                max-width: 280px;
+                left: -150%; /* 调整初始隐藏位置 */
+            }
         }
 
         .profile-section {
@@ -317,23 +331,19 @@
         <div class="profile-section">
             <img src="1.jpg" class="profile-avatar" alt="头像">
             <h3 class="profile-name">小王同学</h3>
-            <p class="profile-bio">前端开发者 | 热爱技术与设计</p>
+            <p class="profile-bio">电影爱好者 | 学生</p>
         </div>
         <div class="social-links">
             <a href="https://weibo.com/你的账号" target="_blank" class="weibo">
-                <i class="fab fa-weibo"></i>
                 <span>微博</span>
             </a>
             <a href="https://www.douban.com/people/你的ID/" target="_blank" class="douban">
-                <i class="fab fa-pagelines"></i>
                 <span>豆瓣</span>
             </a>
             <a href="https://music.163.com/#/user/home?id=你的ID" target="_blank" class="netease">
-                <i class="fab fa-napster"></i>
                 <span>网易云</span>
             </a>
             <a href="https://www.xiaohongshu.com/user/profile/你的ID" target="_blank" class="xiaohongshu">
-                <i class="fas fa-heart"></i>
                 <span>小红书</span>
             </a>
         </div>
