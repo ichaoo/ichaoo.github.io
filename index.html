@@ -60,76 +60,31 @@
             padding: 8px 20px;
             border-radius: 24px;
             background: rgba(255,255,255,0.6);
-        }
-
-        /* 响应式适配 */
-        @media (max-width: 768px) {
-            .page-title {
-                top: 1.5rem; /* 移动端微调 */
-            }
-        }
-
-        .copyright {
-            position: fixed;
-            bottom: 1.5rem;
-            width: fit-content;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50; /* 降低层级避免覆盖 */
-            text-align: center;
-            font-size: 0.9em;
-            color: rgba(44, 62, 80, 0.7);
-            font-family: 'Geist Sans', 'Source Han Sans CN', sans-serif;
-            background: rgba(255,255,255,0.15);
-            backdrop-filter: blur(4px);
-            padding: 8px 20px;
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
-        .social-trigger {
-            position: fixed;
-            right: 2rem;
-            bottom: 2rem; /* 从 top 改为 bottom */
             cursor: pointer;
-            background: rgba(255,255,255,0.8);
-            padding: 12px;
-            border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
+            transition: transform 0.3s;
+        }
+
+        .page-title.active {
+            transform: translateX(-50%) scale(0.95);
         }
 
         .social-panel {
             position: fixed;
-            left: -100%; /* 替换原 right 定位 */
-            top: 50%;
-            transform: translate(-50%, -50%); /* 新增居中定位 */
+            left: 50%;
+            top: -100%;
+            transform: translateX(-50%);
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
             padding: 1.5rem;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 修改过渡属性 */
+            transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 100;
-            width: 300px;
+            width: min(500px, 80%);
+            max-width: 90vw;
         }
 
-        .social-trigger.active + .social-panel {
-            left: 50%; /* 修改激活状态定位 */
-        }
-
-        /* 移动端适配 */
-        @media (max-width: 768px) {
-            .social-panel {
-                width: 90%;
-                max-width: 280px;
-                left: -150%; /* 调整初始隐藏位置 */
-            }
+        .page-title.active + .social-panel {
+            top: calc(2rem + 3em);
         }
 
         .profile-section {
@@ -182,85 +137,12 @@
             transform: translateY(-2px);
         }
 
-        .social-links i {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        /* 交互效果 */
-        .social-trigger:hover {
-            transform: scale(1.1) rotate(12deg);
-        }
-        .social-trigger.active {
-            transform: rotate(45deg);
-        }
-        .social-trigger.active + .social-panel {
-            right: 2rem;
-        }
-
-        #hitokoto {
-            font-family: 'STZhongsong', 'Source Serif 4', 'Microsoft Yahei', serif;
-            color: #2c3e50;
-            font-size: clamp(18px, 5.5vw, 36px); /* 加大字体范围 */
-            line-height: 1.6; /* 微调行高增强可读性 */
-            /* 新增备用字体 */
-            position: relative;
-            padding: clamp(1em, 3vw, 1.5em) clamp(1em, 4vw, 2em) 1.2em; /* 增加底部内边距 */
-        }
-
-        /* 添加引号标识 */
-        #hitokoto::before {
-            content: "“";
-            position: absolute;
-            left: 0.3em;
-            top: -0.1em;
-            font-size: 2.2em;
-            color: rgba(44, 62, 80, 0.3);
-        }
-
         /* 暗黑模式适配 */
         @media (prefers-color-scheme: dark) {
-            #hitokoto::before,
-            #hitokoto::after {
-                color: rgba(236, 240, 241, 0.3);
-            }
-            #hitokoto {
-                padding-top: 1.8em; /* 增加顶部间距 */
-            }
-        }
-
-        /* 移动端适配 */
-        @media (max-width: 480px) {
-            #hitokoto::before,
-            #hitokoto::after {
-                font-size: 1.8em;
-            }
-        }
-            color: #2c3e50;
-            font-size: clamp(16px, 4.8vw, 30px);
-            line-height: 1.5;
-            padding: clamp(1em, 3vw, 1.5em) clamp(1em, 4vw, 2em);
-            border: 1px solid rgba(44, 62, 80, 0.1);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.6);
-            position: relative;
-            max-width: min(600px, 90%);
-            width: auto;
-            overflow-wrap: break-word;
-            align-self: center;
-            margin: 2vh auto;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* 暗黑模式适配 */
-        @media (prefers-color-scheme: dark) {
-            #hitokoto { 
-                color: #ecf0f1;
-                border-color: rgba(236, 240, 241, 0.2);
-                background: rgba(0,0,0,0.3);
+            .social-panel {
+                z-index: 999;
+                background: rgba(0,0,0,0.8);
+                color: #fff;
             }
             body { 
                 background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); 
@@ -268,14 +150,6 @@
             .page-title {
                 color: rgba(236, 240, 241, 0.9);
                 background: rgba(0,0,0,0.4);
-            }
-            .social-trigger {
-                background: rgba(0,0,0,0.6);
-                box-shadow: 0 2px 8px rgba(255,255,255,0.1);
-            }
-            .social-panel {
-                background: rgba(0,0,0,0.8);
-                color: #fff;
             }
             .profile-section {
                 border-color: rgba(255,255,255,0.1);
@@ -288,25 +162,114 @@
             }
         }
 
-        /* 响应式适配 */
-        @media (max-width: 768px) {
-            .copyright {
-                font-size: 0.8em;
-                bottom: 1rem;
-                padding: 6px 16px;
+        /* 平板适配 */
+        @media (max-width: 1024px) {
+            .social-panel {
+                transition-duration: 0.25s;
             }
+        }
 
-        .social-links {
-            grid-template-columns: 1fr;
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .social-panel {
+                width: 88vw;
+                max-width: 400px;
+                padding: 1rem;
+            }
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+            }
+            .page-title {
+                top: 1.5rem;
+            }
+        }
+
+        /* 超小屏幕适配 */
+        @media (max-width: 480px) {
+            .social-panel {
+                width: 92vw;
+                padding: 1rem;
+                border-radius: 8px;
+            }
+            .social-links {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .social-links a {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            .profile-name {
+                font-size: 1.1rem;
+            }
+        }
+
+        .copyright {
+            position: fixed;
+            bottom: 1.5rem;
+            width: fit-content;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            text-align: center;
+            font-size: 0.9em;
+            color: rgba(44, 62, 80, 0.7);
+            font-family: 'Geist Sans', 'Source Han Sans CN', sans-serif;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            padding: 8px 20px;
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        #hitokoto {
+            font-family: 'STZhongsong', 'Source Serif 4', 'Microsoft Yahei', serif;
+            color: #2c3e50;
+            font-size: clamp(18px, 5.5vw, 36px);
+            line-height: 1.6;
+            position: relative;
+            padding: clamp(1em, 3vw, 1.5em) clamp(1em, 4vw, 2em) 1.2em;
+            border: none; /* 移除边框 */
+            border-radius: 0; /* 移除圆角 */
+            background: transparent;
+            max-width: min(600px, 90%);
+            margin: 2vh auto;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #hitokoto::before {
+            content: "“";
+            position: absolute;
+            left: 0.5em; /* 调整引号位置 */
+            top: -0.15em;
+            font-size: 2.2em;
+            color: rgba(44, 62, 80, 0.3);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            #hitokoto { 
+                color: #ecf0f1;
+                border: none; /* 确保暗黑模式也移除边框 */
+            }
+            #hitokoto::before {
+                color: rgba(236, 240, 241, 0.3);
+                left: 0.3em; /* 暗黑模式微调位置 */
+            }
+        }
+
+        @media (max-width: 480px) {
+            #hitokoto::before {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1 class="page-title">一言</h1>
-    
-    <div class="social-trigger">
-        <i class="fas fa-user"></i>
-    </div>
+    <h1 class="page-title">一言启示录</h1>
     
     <div class="social-panel">
         <div class="profile-section">
@@ -356,8 +319,7 @@
         }
         fetchHitokoto();
         document.querySelector('.container').addEventListener('click', fetchHitokoto);
-        
-        document.querySelector('.social-trigger').addEventListener('click', function() {
+        document.querySelector('.page-title').addEventListener('click', function() {
             this.classList.toggle('active');
         });
     </script>
