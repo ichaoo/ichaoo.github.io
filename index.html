@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>W</title>
+    <title>一言 Hitokoto</title>
     <link href="https://fonts.loli.net/css2?family=Source+Serif+4:opsz@8..60&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -57,19 +57,6 @@
             padding: 8px 20px;
             border-radius: 24px;
             background: rgba(255,255,255,0.6);
-            white-space: nowrap; /* 新增禁止换行 */
-            max-width: 90vw; /* 新增最大宽度限制 */
-            overflow: hidden;
-            text-overflow: ellipsis; /* 新增文本溢出处理 */
-        }
-
-        @media (max-width: 768px) {
-            .page-title {
-                font-size: clamp(1rem, 4.5vw, 1.4rem); /* 调整移动端字号 */
-                letter-spacing: 0.05em;
-                padding: 6px 1rem; /* 紧凑型内边距 */
-                max-width: 85vw; /* 更严格的宽度限制 */
-            }
         }
 
         @media (min-width: 1920px) {
@@ -280,7 +267,7 @@
     </style>
 </head>
 <body>
-    <h1 class="page-title">小王同学</h1>
+    <h1 class="page-title">一言启示录</h1>
     
     <div class="social-trigger">
         <i class="fas fa-share-alt"></i>
@@ -333,3 +320,13 @@
     </script>
 </body>
 </html>
+
+<link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+
+<style>
+    .page-title {
+        font-family: 'Noto Serif SC', serif;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+    }
+</style>
