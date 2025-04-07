@@ -1,80 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>w</title>
-    <link href="https://fonts.googleapis.cn/css2?family=Inter:wght@400;500;600&family=Source+Han+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>一言 Hitokoto</title>
+    <link href="https://fonts.loli.net/css2?family=Source+Serif+4:opsz@8..60&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
         body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', 'Source Han Sans CN', 'Noto Sans CJK SC', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: calc(100vh - 40px);
-            font-family: 'Inter', 'Source Han Sans SC', system-ui, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            margin: 0;
-            padding: 20px;
+            min-height: 100vh;
             overflow: hidden;
         }
 
-        #quote-container {
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
+        .container {
+            padding: clamp(2rem, 5vw, 4rem);
+            max-width: 85%;
+            text-align: center;
+            margin: 0 auto;
             overflow: hidden;
-        }
-
-        .quote-text {
-            line-height: 1.5;
-            font-size: clamp(1.2rem, 2.5vw, 1.4em);
-            color: #2c3e50;
             position: relative;
-            padding-left: 1.5rem;
-            margin: 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            font-weight: 500;
-            letter-spacing: -0.02em;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: safe center;
         }
 
-        .quote-text::before {
-            content: "“";
-            position: absolute;
-            left: -0.8rem;
-            top: -1.2rem;
-            font-size: 4em;
-            color: rgba(44, 62, 80, 0.1);
+        .page-title {
+            position: fixed;
+            top: clamp(1rem, 3vh, 2rem);
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Source Han Sans CN', sans-serif;
+            color: rgba(44, 62, 80, 0.9);
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            letter-spacing: 0.1em;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            padding: 8px 20px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.6);
+            white-space: nowrap; /* 新增禁止换行 */
+            max-width: 90vw; /* 新增最大宽度限制 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 新增文本溢出处理 */
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-                min-height: calc(100vh - 20px);
-            }
-            #quote-container {
-                padding: 1.5rem;
-                border-radius: 20px;
-                max-width: 85%;
-            }
-            .quote-text {
-                font-size: clamp(1rem, 3.5vw, 1.1em);
-                -webkit-line-clamp: 4;
-                padding-left: 1rem;
-                font-weight: 400;
+            .page-title {
+                font-size: clamp(1rem, 4.5vw, 1.4rem); /* 调整移动端字号 */
+                letter-spacing: 0.05em;
+                padding: 6px 1rem; /* 紧凑型内边距 */
+                max-width: 85vw; /* 更严格的宽度限制 */
             }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @media (min-width: 1920px) {
+            #hitokoto {
+                font-size: 1.6rem;
+                max-width: 800px;
+            }
+            .social-panel {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                max-width: 95%;
+                padding: 1rem;
+            }
+            #hitokoto {
+                padding: 1em;
+                border-radius: 8px;
+            }
+            .social-panel {
+                gap: 0.75rem;
+                padding: 1rem;
+            }
+            .social-panel span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) and (max-height: 700px) {
+            .page-title {
+                padding: 6px 16px;
+                border-radius: 16px;
+            }
+            #hitokoto {
+                font-size: clamp(14px, 4vw, 16px);
+                line-height: 1.3;
+            }
+        }
+
+        #hitokoto {
+            font-family: 'STZhongsong', 'Source Serif 4', serif;
+            color: #2c3e50;
+            font-size: clamp(16px, 4.8vw, 30px);
+            line-height: 1.5;
+            padding: clamp(1em, 3vw, 1.5em) clamp(1em, 4vw, 2em);
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.6);
+            position: relative;
+            max-width: min(600px, 90%);
+            width: auto;
+            overflow-wrap: break-word;
+            align-self: center;
+            margin-top: 0;
+        }
+
+        .page-title {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Source Han Sans CN', sans-serif;
+            color: rgba(44, 62, 80, 0.9);
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            padding: 8px 20px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.6);
         }
 
         .copyright {
@@ -83,16 +150,118 @@
             width: fit-content;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 10;
             text-align: center;
             font-size: 0.9em;
             color: rgba(44, 62, 80, 0.7);
             font-family: 'Geist Sans', 'Source Han Sans CN', sans-serif;
-            font-weight: 450;
             background: rgba(255,255,255,0.15);
             backdrop-filter: blur(4px);
             padding: 8px 20px;
             border-radius: 12px;
-            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .social-trigger {
+            position: fixed;
+            right: 2rem;
+            top: 2rem;
+            cursor: pointer;
+            background: rgba(255,255,255,0.8);
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+        }
+
+        .social-panel {
+            position: fixed;
+            right: -200px;
+            top: 6rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .social-panel a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: currentColor;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .social-panel a:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .social-panel i {
+            font-size: 1.5rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .social-panel span {
+            font-family: 'Source Han Sans CN', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        /* 社交品牌色 */
+        .weibo { color: #e6162d; }
+        .douban { color: #007722; }
+        .netease { color: #c20c0c; }
+        .xiaohongshu { color: #ff2442; }
+
+        .social-trigger:hover {
+            transform: scale(1.1) rotate(12deg);
+        }
+        .social-trigger.active {
+            transform: rotate(45deg);
+        }
+        .social-trigger.active + .social-panel {
+            right: 2rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body { 
+                background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); 
+            }
+            #hitokoto { 
+                color: #ecf0f1;
+                border-color: rgba(236, 240, 241, 0.2);
+                background: rgba(0,0,0,0.3);
+            }
+            .page-title {
+                color: rgba(236, 240, 241, 0.9);
+                background: rgba(0,0,0,0.4);
+            }
+            .social-trigger {
+                background: rgba(0,0,0,0.6);
+                box-shadow: 0 2px 8px rgba(255,255,255,0.1);
+            }
+            .social-panel {
+                background: rgba(0,0,0,0.8);
+                color: #fff;
+            }
+            .copyright { 
+                color: rgba(236, 240, 241, 0.7);
+                background: rgba(0,0,0,0.15);
+            }
         }
 
         @media (max-width: 768px) {
@@ -101,53 +270,66 @@
                 bottom: 1rem;
                 padding: 6px 16px;
             }
+            .social-panel {
+                top: 5rem;
+                right: -100%;
+                width: 80%;
+                max-width: 280px;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="quote-container">
-        <script>
-            window.onload = async function() {
-                const container = document.getElementById('quote-container');
-                try {
-                    // 更新参数格式为逗号分隔的多分类
-                    const apiUrl = new URL('https://v1.hitokoto.cn');
-                    apiUrl.searchParams.set('c', 'a,h,k');  // 动画、影视、文学
-                    apiUrl.searchParams.set('min_length', '20');
-                    apiUrl.searchParams.set('max_length', '50');
-                    
-                    const response = await fetch(apiUrl);
-                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                    
-                    const data = await response.json();
-                    // 添加字段兼容性处理
-                    const quote = data.hitokoto || data.text;
-                    const source = data.from_who || data.from;
-                    
-                    container.innerHTML = `
-                        <p class="quote-text">
-                            ${quote}
-                            ${source ? `<br><em>——${source}</em>` : ''}
-                        </p>`;
-                } catch (error) {
-                    console.error('Fetch error:', error);
-                    container.innerHTML = `
-                        <p class="quote-text" style="color: #ff4757">
-                            ${error.message}<br>
-                            <span style="font-size:0.8em">正在使用本地语句库</span>
-                        </p>`;
-                    // 延迟加载后备语录
-                    setTimeout(() => {
-                        const fallbackQuotes = [ /* 原有内容不变 */ ];
-                        const randomIndex = Math.floor(Math.random() * fallbackQuotes.length);
-                        container.innerHTML = `<p class="quote-text">${fallbackQuotes[randomIndex]}</p>`;
-                    }, 2000);
-                }
-            };
-        </script>
+    <h1 class="page-title">一言启示录</h1>
+    
+    <div class="social-trigger">
+        <i class="fas fa-share-alt"></i>
     </div>
-    <div class="copyright">
-        数据来源：Hitokoto·一言 | © 2025 小王同学
+    
+    <div class="social-panel">
+        <a href="https://weibo.com/你的账号" target="_blank" class="weibo">
+            <i class="fab fa-weibo"></i>
+            <span>关注微博</span>
+        </a>
+        <a href="https://www.douban.com/people/你的ID/" target="_blank" class="douban">
+            <i class="fab fa-pagelines"></i>
+            <span>豆瓣日记</span>
+        </a>
+        <a href="https://music.163.com/#/user/home?id=你的ID" target="_blank" class="netease">
+            <i class="fab fa-napster"></i>
+            <span>网易云音乐</span>
+        </a>
+        <a href="https://www.xiaohongshu.com/user/profile/你的ID" target="_blank" class="xiaohongshu">
+            <i class="fas fa-heart"></i>
+            <span>小红书</span>
+        </a>
     </div>
+
+    <div class="container">
+        <div id="hitokoto">正在加载一言...</div>
+    </div>
+    <div class="copyright">数据来源：Hitokoto·一言 | © 2025 小王同学</div>
+
+    <script>
+        function fetchHitokoto() {
+            fetch('https://v1.hitokoto.cn/')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('hitokoto').textContent = 
+                        `${data.hitokoto} —— ${data.from || '未知来源'}`;
+                })
+                .catch(() => {
+                    document.getElementById('hitokoto').textContent = 
+                        '获取一言失败，点击重试';
+                });
+        }
+        fetchHitokoto();
+        document.querySelector('.container').addEventListener('click', fetchHitokoto);
+        
+        // 社交面板交互
+        document.querySelector('.social-trigger').addEventListener('click', function() {
+            this.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
