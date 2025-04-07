@@ -224,29 +224,19 @@
         }
 
         #hitokoto {
-            font-family: 'STZhongsong', 'Source Serif 4', 'Microsoft Yahei', serif;
+            font-family: 'Source Serif 4', serif;
             color: #2c3e50;
             font-size: clamp(18px, 5.5vw, 36px);
             line-height: 1.6;
             position: relative;
-            padding: clamp(1em, 3vw, 1.5em) clamp(1em, 4vw, 2em) 1.2em;
-            border: none; /* 移除边框 */
-            border-radius: 0; /* 移除圆角 */
-            background: transparent;
-            max-width: min(600px, 90%);
-            margin: 2vh auto;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0 1em;
         }
 
         #hitokoto::before {
             content: "“";
             position: absolute;
-            left: 0.5em; /* 调整引号位置 */
-            top: -0.15em;
-            font-size: 2.2em;
+            left: -0.2em;
+            font-size: 1.8em;
             color: rgba(44, 62, 80, 0.3);
         }
 
