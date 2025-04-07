@@ -164,24 +164,28 @@
         @media (prefers-color-scheme: dark) {
             .social-panel {
                 z-index: 999;
-                background: rgba(0,0,0,0.8);
-                color: #fff;
+                background: rgba(40, 40, 40, 0.95); /* 调整为深灰半透明 */
+                color: #f0f0f0; /* 文字颜色微调 */
             }
             body { 
-                background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); 
+                background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); /* 更柔和的深灰渐变 */
             }
             .page-title {
-                color: rgba(236, 240, 241, 0.9);
-                background: rgba(0,0,0,0.4);
+                color: rgba(240, 240, 240, 0.9);
+                background: rgba(30, 30, 30, 0.6); /* 加深背景透明度 */
             }
             .profile-section {
-                border-color: rgba(255,255,255,0.1);
+                border-color: rgba(255,255,255,0.15); /* 降低边框对比度 */
             }
             .profile-name {
-                color: #fff;
+                color: #f8f8f8; /* 微调文字亮度 */
             }
             .profile-bio {
-                color: rgba(255,255,255,0.8);
+                color: rgba(220, 220, 220, 0.9); /* 提高副文本可读性 */
+            }
+            /* 新增社交链接悬停效果适配 */
+            .social-links a:hover {
+                background: rgba(255,255,255,0.05);
             }
         }
 
@@ -313,7 +317,7 @@
             <a href="https://www.douban.com/people/" target="_blank" class="douban">
                 <span>豆瓣</span>
             </a>
-            <a href="https://music.163.com/#/user/home?id=" target="_blank" class="netease-Music">
+            <a href="https://music.163.com/#/user/home?id=" target="_blank" class="netease">
                 <span>网易云音乐</span>
             </a>
             <a href="https://www.xiaohongshu.com/user/profile/" target="_blank" class="xiaohongshu">
