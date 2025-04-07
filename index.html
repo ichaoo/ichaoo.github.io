@@ -37,8 +37,7 @@
         }
 
         .page-title,
-        .social-panel,
-        .copyright {
+        .social-panel {
             position: fixed;
             left: 50%;
             transform: translateX(-50%);
@@ -85,6 +84,26 @@
             transform: translateX(-50%) scale(1);
         }
 
+        /* 新增版权信息样式 */
+        .copyright {
+            text-align: center;
+            font-size: 0.8em;
+            color: var(--secondary-text);
+            padding: 12px 0 0;
+            margin: 1rem 0 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-family: inherit;
+            background: transparent !important;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .copyright {
+                color: rgba(220, 220, 220, 0.7);
+                border-color: rgba(255,255,255,0.15);
+            }
+        }
+
+        /* 保持其他原有样式不变 */
         .profile-section {
             text-align: center;
             padding-bottom: 1.5rem;
@@ -172,20 +191,7 @@
             color: rgba(44, 62, 80, 0.3);
         }
 
-        .copyright {
-            bottom: 1.5rem;
-            width: fit-content;
-            text-align: center;
-            font-size: 0.9em;
-            color: var(--copyright-light);
-            font-family: 'Geist Sans', 'Source Han Sans CN', sans-serif;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(4px);
-            padding: 8px 20px;
-            border-radius: 12px;
-            pointer-events: none;
-        }
-
+        /* 删除原底部版权样式 */
         @media (prefers-color-scheme: dark) {
             body { background: var(--dark-bg); }
             .social-panel {
@@ -214,12 +220,9 @@
             #hitokoto::before {
                 color: rgba(236, 240, 241, 0.3);
             }
-            .copyright {
-                color: var(--copyright-dark);
-                background: rgba(0,0,0,0.2);
-            }
         }
 
+        /* 保持其他媒体查询不变 */
         @media (min-width: 769px) {
             .social-panel {
                 transition-property: top, opacity, transform, filter;
@@ -287,11 +290,11 @@
             <a href="https://music.163.com/#/user/home?id=" target="_blank" class="netease"><span>网易云音乐</span></a>
             <a href="https://www.xiaohongshu.com/user/profile/" target="_blank" class="xiaohongshu"><span>小红书</span></a>
         </div>
+        <div class="copyright">数据来源：Hitokoto·一言 | © 2025 小王同学</div>
     </div>
     <div class="container">
         <div id="hitokoto">正在加载一言...</div>
     </div>
-    <div class="copyright">数据来源：Hitokoto·一言 | © 2025 小王同学</div>
 
     <script>
         function fetchHitokoto() {
